@@ -102,7 +102,8 @@ func _physics_process(delta:float)->void:
 					speed.x = maxWalkSpeed * dir
 		else:   #no direction pressed
 			var decel: = skidDecel if skidding else releaseDecel
-			if abs(speed.x) < decel:
+			if abs(speed.x) < decel * delta:
+				print(speed.x, ' ', decel)
 				speed.x = 0
 			else:
 				speed.x -= decel * sign(speed.x) * delta
