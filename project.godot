@@ -8,56 +8,9 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "KinematicBody2D",
-"class": "Actor",
-"language": "GDScript",
-"path": "res://player/Actor.gd"
-}, {
-"base": "Actor",
-"class": "Player",
-"language": "GDScript",
-"path": "res://player/Player.gd"
-}, {
-"base": "PlayerState",
-"class": "PlayerIdle",
-"language": "GDScript",
-"path": "res://player/States/PlayerIdle.gd"
-}, {
-"base": "PlayerState",
-"class": "PlayerJump",
-"language": "GDScript",
-"path": "res://player/States/PlayerJump.gd"
-}, {
-"base": "State",
-"class": "PlayerState",
-"language": "GDScript",
-"path": "res://player/PlayerState.gd"
-}, {
-"base": "PlayerState",
-"class": "PlayerWalk",
-"language": "GDScript",
-"path": "res://player/States/PlayerWalk.gd"
-}, {
-"base": "Reference",
-"class": "State",
-"language": "GDScript",
-"path": "res://addons/StateMachine_system/State.gd"
-}, {
-"base": "Node",
-"class": "StateMachine",
-"language": "GDScript",
-"path": "res://addons/StateMachine_system/StateMachine.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"Actor": "",
-"Player": "",
-"PlayerIdle": "",
-"PlayerJump": "",
-"PlayerState": "",
-"PlayerWalk": "",
-"State": "",
-"StateMachine": ""
+
 }
 
 [application]
@@ -68,11 +21,11 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=320
-window/size/height=180
-window/size/test_width=1280
-window/size/test_height=720
-window/stretch/mode="viewport"
+window/size/width=256
+window/size/height=224
+window/size/test_width=768
+window/size/test_height=672
+window/stretch/mode="2d"
 window/stretch/aspect="keep_height"
 
 [importer_defaults]

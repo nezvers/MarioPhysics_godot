@@ -1,15 +1,16 @@
 extends KinematicBody2D
 
 onready var body: = $Body
+onready var anim: = $AnimationPlayer
 
 var speed:			= Vector2.ZERO
 var acceleration:	= 0.0
 var skidding:		= false
-var fastjump:		= false       #Jump started at > maxWalkSpeed
-var fasterjump:		= false     #Jump started at > airspeedCutoff
-var fastVjump:		= false        #Jump started at > jumpCutoff1
-var fasterVjump:	= false    #Jump started at > jumpCutoff2
-var direction:		= 0.0          #facingLeft = false
+var fastjump:		= false		#Jump started at > maxWalkSpeed
+var fasterjump:		= false		#Jump started at > airspeedCutoff
+var fastVjump:		= false		#Jump started at > jumpCutoff1
+var fasterVjump:	= false		#Jump started at > jumpCutoff2
+var direction:		= 0.0		#Input horizontal direction
 var is_grounded:	= true
 
 var sprint_buffer: = 0
@@ -83,10 +84,8 @@ func _physics_process(delta:float)->void:
 			acceleration = walkAccel
 
 		if abs(direction) > 0.01:
-			body.scale.x = dir
 			skidding = sign(speed.x) != dir && abs(speed.x) > 0.00001
 			if skidding:
-				print(skidding, ' ', speed.x)
 				if abs(speed.x) > turnSpeed:
 					speed.x += skidDecel * dir      * delta
 				else:
@@ -103,7 +102,6 @@ func _physics_process(delta:float)->void:
 		else:   #no direction pressed
 			var decel: = skidDecel if skidding else releaseDecel
 			if abs(speed.x) < decel * delta:
-				print(speed.x, ' ', decel)
 				speed.x = 0
 			else:
 				speed.x -= decel * sign(speed.x) * delta
@@ -152,19 +150,6 @@ func _physics_process(delta:float)->void:
 	speed = move_and_slide(speed, Vector2.UP)
 	slide_collision_check()
 	
-	
-	#var collision = move_and_collide(Vector2(speed.x, speed.y))
-	#collision_check(collision)
-
-func collision_check(collision:KinematicCollision2D)->void:
-	is_grounded = false
-	if collision:
-		if collision.normal.y < -0.5:
-			speed.y = 0.0
-			is_grounded = true
-		if abs(collision.normal.x) > 0.5:
-			speed.x = 0.0
-	
 
 func slide_collision_check()->void:
 	is_grounded = is_on_floor()
@@ -174,3 +159,34 @@ func slide_collision_check()->void:
 #			print(collision.collider)
 #		if abs(collision.normal.x) > 0.5:   #hit sides
 #			print(collision.collider)
+
+func _process(_delta:float)->void:				#Drawing
+	if	!is_equal_approx(direction, 0.0):
+		body.scale.x = sign(direction)
+	
+	if is_grounded:
+		if is_equal_approx(speed.x, 0.0):
+			anim.play("Idle")
+		else:
+			if skidding:
+				anim.play("Skid")
+			else:
+				anim.play("Walk")
+				if fasterjump:
+					anim.playback_speed = 1.96
+				elif abs(speed.x) >= maxWalkSpeed:
+					anim.playback_speed = 1.62
+				else:
+					anim.playback_speed = 1
+	else:
+		anim.play("Jump")
+
+
+
+
+
+
+
+
+
+
