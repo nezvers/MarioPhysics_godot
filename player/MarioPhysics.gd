@@ -55,17 +55,17 @@ var input_action:	= false
 
 func _unhandled_input(event:InputEvent)->void:
 	if event.is_action("input_right"):
-		input_right = Input.get_action_strength("input_right")
+		input_right		= Input.get_action_strength("input_right")
 	elif event.is_action("input_left"):
-		input_left = Input.get_action_strength("input_left")
+		input_left		= Input.get_action_strength("input_left")
 	elif event.is_action("input_up"):
-		input_up = Input.get_action_strength("input_up")
+		input_up		= Input.get_action_strength("input_up")
 	elif event.is_action("input_down"):
-		input_down = Input.get_action_strength("input_down")
+		input_down		= Input.get_action_strength("input_down")
 	elif event.is_action("input_jump"):
-		input_jump = Input.is_action_pressed("input_jump")
+		input_jump		= Input.is_action_pressed("input_jump")
 	elif event.is_action("input_action"):
-		input_action = Input.is_action_pressed("input_action")
+		input_action	= Input.is_action_pressed("input_action")
 
 func _physics_process(delta:float)->void:
 	direction = input_right - input_left
@@ -145,7 +145,7 @@ func _physics_process(delta:float)->void:
 		if velocity.y > max_fall:
 			velocity.y = max_fall
 	
-	input_jump_p = input_jump
+	input_jump_p = input_jump												#save old jump button state
 	velocity = move_and_slide(velocity, Vector2.UP)
 	slide_collision_check()
 	
