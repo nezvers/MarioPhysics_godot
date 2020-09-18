@@ -17,32 +17,32 @@ var sprint_buffer:			= 0
 var sprint_buffer_amount:	= 10
 
 # Constants
-const walk_acc:					= (9.0/256 + 8.0/(16*16*16)) 	*60.0	*60.0
-const run_acc:					= (14.0/256 + 4.0/(16*16*16))	*60.0	*60.0
-const min_walk:					= (1.0/16 + 3.0/256)			*60.0
-const max_walk:					= (1 + 9.0/16)					*60.0
-const max_run:					= (2 + 9.0/16)					*60.0
-const release_deacc:			= (13.0/256)					*60.0	*60.0
-const skid_deacc:				= (1.0/16 + 10.0/256)			*60.0	*60.0
-const turn_treshold:			= (9.0/16)						*60.0
+const walk_acc:					= (9.0/256 + 8.0/(16*16*16)) 	*60	*60
+const run_acc:					= (14.0/256 + 4.0/(16*16*16))	*60	*60
+const min_walk:					= (1.0/16 + 3.0/256)			*60
+const max_walk:					= (1 + 9.0/16)					*60
+const max_run:					= (2 + 9.0/16)					*60
+const release_deacc:			= (13.0/256)					*60	*60
+const skid_deacc:				= (1.0/16 + 10.0/256)			*60	*60
+const turn_treshold:			= (9.0/16)						*60
 
-const air_spd_treshold:			= (1 + 13.0/16)					*60.0
-const air_slow_acc:				= (9.0/256 + 8.0/(16*16*16))	*60.0	*60.0
-const air_fast_acc:				= (14.0/256 + 4.0/(16*16*16))	*60.0	*60.0
-const air_fast_drag:			= (13.0/256)					*60.0
-const air_slow_drag:			= (9.0/256 + 8.0/(16*16*16))	*60.0
+const air_spd_treshold:			= (1 + 13.0/16)					*60
+const air_slow_acc:				= (9.0/256 + 8.0/(16*16*16))	*60	*60
+const air_fast_acc:				= (14.0/256 + 4.0/(16*16*16))	*60	*60
+const air_fast_drag:			= (13.0/256)					*60
+const air_slow_drag:			= (9.0/256 + 8.0/(16*16*16))	*60
 
-const jump_spd:					= 4.0							*60.0
-const big_jump_spd:				= 5.0							*60.0
-const small_up_drag:			= (2.0/16)						*60.0	*60.0
-const medium_up_drag:			= (1.0/16 + 14.0/256)			*60.0	*60.0
-const big_up_drag:				= (2.0/16 + 8.0/256)			*60.0	*60.0
-const small_gravity:			= (7.0/16)						*60.0	*60.0
-const medium_gravity:			= (6.0/16)						*60.0	*60.0
-const big_gravity:				= (9.0/16)						*60.0	*60.0
-const fast_jump_treshold:		= 1.0							*60.0
-const fastest_jump_treshold:	= (2 + 5.0/16)					*60.0
-const max_fall:					= 4.0							*60.0
+const jump_spd:					= 4.0							*60
+const big_jump_spd:				= 5.0							*60
+const small_up_drag:			= (2.0/16)						*60	*60
+const medium_up_drag:			= (1.0/16 + 14.0/256)			*60	*60
+const big_up_drag:				= (2.0/16 + 8.0/256)			*60	*60
+const small_gravity:			= (7.0/16)						*60	*60
+const medium_gravity:			= (6.0/16)						*60	*60
+const big_gravity:				= (9.0/16)						*60	*60
+const fast_jump_treshold:		= 1.0							*60
+const fastest_jump_treshold:	= (2 + 5.0/16)					*60
+const max_fall:					= 4.0							*60
 
 #Inputs
 var input_right:	= 0.0
@@ -76,7 +76,7 @@ func _physics_process(delta:float)->void:
 	var dir: = sign(direction)
 	
 	if is_grounded:
-		velocity.y = small_gravity*delta									#need to have a little gravity for ground detection
+		velocity.y = small_gravity *delta									#need to have a little gravity for ground detection
 
 		if input_action:
 			sprint_buffer = sprint_buffer_amount
