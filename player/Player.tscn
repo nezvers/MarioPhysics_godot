@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/MarioSprite.png" type="Texture" id=1]
-[ext_resource path="res://player/MarioPhysics.gd" type="Script" id=2]
+[ext_resource path="res://player/MarioPhysics_frame_speed.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 8 )
@@ -38,7 +38,7 @@ tracks/0/keys = {
 "values": [ 5 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "Skid"
 length = 0.1
 tracks/0/type = "value"
@@ -54,7 +54,7 @@ tracks/0/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.39
 loop = true
 step = 0.13
@@ -90,8 +90,8 @@ hframes = 6
 autoplay = "Idle"
 anims/Idle = SubResource( 2 )
 anims/Jump = SubResource( 3 )
-anims/Skid = SubResource( 6 )
-anims/Walk = SubResource( 4 )
+anims/Skid = SubResource( 4 )
+anims/Walk = SubResource( 5 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
