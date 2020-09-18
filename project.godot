@@ -23,9 +23,9 @@ config/icon="res://icon.png"
 
 window/size/width=256
 window/size/height=224
-window/size/test_width=768
-window/size/test_height=672
-window/stretch/mode="2d"
+window/size/test_width=1536
+window/size/test_height=1344
+window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 
 [importer_defaults]
@@ -103,6 +103,10 @@ input_action={
 
 2d_physics/layer_1="Environment"
 2d_physics/layer_2="Player"
+
+[physics]
+
+2d/thread_model=2
 
 [rendering]
 

@@ -66,13 +66,17 @@ func _unhandled_input(event:InputEvent)->void:
 		input_jump		= Input.is_action_pressed("input_jump")
 	elif event.is_action("input_action"):
 		input_action	= Input.is_action_pressed("input_action")
+	elif event.is_action_pressed("ui_accept"):
+		Engine.time_scale = 0.5
+	elif event.is_action_released("ui_accept"):
+		Engine.time_scale = 1.0
 
 func _physics_process(delta:float)->void:
 	direction = input_right - input_left
 	var dir: = sign(direction)
 	
 	if is_grounded:
-		velocity.y = small_gravity*delta				#need to have a little gravity for ground detection
+		velocity.y = small_gravity*delta									#need to have a little gravity for ground detection
 
 		if input_action:
 			sprint_buffer = sprint_buffer_amount
@@ -90,7 +94,7 @@ func _physics_process(delta:float)->void:
 				else:
 					velocity.x = 0.0
 			else:
-				if is_equal_approx(velocity.x, 0.0):   #no velocity.x
+				if is_equal_approx(velocity.x, 0.0):   						#no velocity.x
 					velocity.x = min_walk * dir
 				else:
 					velocity.x += acc * dir * delta
@@ -110,7 +114,7 @@ func _physics_process(delta:float)->void:
 		fast_jump			= abs_spd > fast_jump_treshold
 		faster_air_limit	= abs_spd > max_walk
 		faster_air_spd		= abs_spd > air_spd_treshold
-		if input_jump && !input_jump_p:    #just pressed
+		if input_jump && !input_jump_p:										#just pressed
 			velocity.y = -big_jump_spd if fastest_jump else -jump_spd
 	
 	else:	#MIDAIR
