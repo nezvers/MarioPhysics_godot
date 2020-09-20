@@ -98,10 +98,10 @@ func _physics_process(delta:float)->void:
 					velocity.x = min_walk * dir
 				else:
 					velocity.x += acc * dir * delta
-				if abs(velocity.x) > max_run:
-					velocity.x = max_run * dir
 				if abs(velocity.x) > max_walk && sprint_buffer == 0:
 					velocity.x = max_walk * dir
+				elif abs(velocity.x) > max_run:								#clamp velocity to max_run
+					velocity.x = max_run * dir
 		else:   															#no direction pressed
 			var de_acc: = skid_deacc if is_skidding else release_deacc
 			if abs(velocity.x) < de_acc * delta:
@@ -158,14 +158,14 @@ func slide_collision_check()->void:
 	is_grounded = is_on_floor()
 	for i in get_slide_count():
 		var collision: = get_slide_collision(i)
-#		if collision.normal.y < -0.5:        #hit up
+#		if collision.normal.y < -0.5:        	#hit up
 #			print(collision.collider)
-#		if abs(collision.normal.x) > 0.5:   #hit sides
+#		if abs(collision.normal.x) > 0.5:   	#hit sides
 #			print(collision.collider)
 
 func _process(_delta:float)->void:				#Drawing
 	if	!is_equal_approx(direction, 0.0):
-		body.scale.x = sign(direction)
+		body.scale.x = sign(direction)			#flip sprite
 	
 	if is_grounded:
 		if is_equal_approx(velocity.x, 0.0):
@@ -175,9 +175,9 @@ func _process(_delta:float)->void:				#Drawing
 				anim.play("Skid")
 			else:
 				anim.play("Walk")
-				if faster_air_spd:
+				if abs(velocity.x) >= max_walk:
 					anim.playback_speed = 1.96
-				elif abs(velocity.x) >= max_walk:
+				elif abs(velocity.x) >= min_walk:
 					anim.playback_speed = 1.62
 				else:
 					anim.playback_speed = 1
