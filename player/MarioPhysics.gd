@@ -151,7 +151,7 @@ func _physics_process(delta:float)->void:
 	input_jump_p = input_jump												#save old jump button state
 	move_and_slide()
 	slide_collision_check()
-	
+
 
 func slide_collision_check()->void:
 	is_grounded = is_on_floor()
@@ -159,7 +159,7 @@ func slide_collision_check()->void:
 func _process(_delta:float)->void:				#Drawing
 	if	!is_equal_approx(direction, 0.0):
 		body.scale.x = sign(direction)			#flip sprite
-	
+	body.global_position = global_position.round()
 	if is_grounded:
 		if is_equal_approx(velocity.x, 0.0):
 			anim.play("Idle")

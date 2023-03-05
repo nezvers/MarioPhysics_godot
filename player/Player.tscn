@@ -94,18 +94,13 @@ shape = SubResource("1")
 position = Vector2(0, -8.05256)
 texture = ExtResource("1")
 hframes = 6
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
 libraries = {
 "": SubResource("AnimationLibrary_kmf3b")
 }
-
-[node name="Camera2D" type="Camera2D" parent="."]
-limit_left = 0
-limit_top = 0
-limit_right = 3392
-limit_bottom = 224
 
 [node name="JumpBuffer" type="Timer" parent="."]
 wait_time = 0.17

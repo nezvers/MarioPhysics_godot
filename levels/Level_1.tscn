@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmjfld1o2jq2r"]
+[gd_scene load_steps=6 format=3 uid="uid://cmjfld1o2jq2r"]
 
 [ext_resource type="TileSet" uid="uid://bqq7ogn8e7ih" path="res://assets/tileset_Ground.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://bu4he330xgbxa" path="res://player/Player.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://d2bc5g1no6md" path="res://assets/Mario_level_layout.png" id="3"]
 [ext_resource type="Script" path="res://Levels/Level.gd" id="4"]
+[ext_resource type="Script" path="res://Levels/CameraController.gd" id="4_3wx5a"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("4")
@@ -25,3 +26,13 @@ layer_0/tile_data = PackedInt32Array(786432, 0, 0, 786433, 0, 0, 851969, 0, 0, 8
 
 [node name="Player" parent="." instance=ExtResource("2")]
 position = Vector2(160.064, 143.163)
+
+[node name="CameraController" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("4_3wx5a")
+smooth_speed = Vector2(8, 15)
+velocity_mult = Vector2(0.5, 0.16)
+target = NodePath("../Player")
+boundries = Rect2(-16, -22, 32, 44)
+debug = true
+show_round = false
+show_boundries = false
