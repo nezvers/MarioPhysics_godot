@@ -1,9 +1,49 @@
 
 # Godot-specific ignores
-.import/
-export.cfg
-export_presets.cfg
+.godot/
+exports/
+bin/
+
+.env
 
 # Mono-specific ignores
 .mono/
 data_*/
+
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Builds
+*.apk
+
+# Gradle cache directory
+.gradle/
+
+# Windows Installer files (We'll probably never encounter these, but to be sure)
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Godot 4.0 stuff
+.godot
+
+# Ignore gitignore
+!**/AndroidManifest.xml
+!**/gradle-wrapper.properties
+!android/build/build.gradle
+!android/build/config.gradle
+!android/build/settings.gradle
+!android/build/gradle.properties

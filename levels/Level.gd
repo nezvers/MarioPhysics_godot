@@ -1,4 +1,3 @@
-tool
 extends Node2D
 
 func _unhandled_input(event):
@@ -7,7 +6,6 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("reset"):
 		get_tree().reload_current_scene()
 
-func _ready()->void:
-	OS.center_window()
+
 
 

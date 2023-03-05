@@ -1,9 +1,8 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var body: = $Body
-onready var anim: = $AnimationPlayer
+@export var body:Node2D
+@export var anim:AnimationPlayer
 
-var velocity:				= Vector2.ZERO
 var acc:					= 0.0
 var is_skidding:			= false
 var faster_air_limit:		= false		#Jump started at > max_walk
@@ -73,7 +72,7 @@ func _unhandled_input(event:InputEvent)->void:
 
 func _physics_process(delta:float)->void:
 	direction = input_right - input_left
-	var dir: = sign(direction)
+	var dir:float = sign(direction)
 	
 	if is_grounded:
 		velocity.y = small_gravity *delta									#need to have a little gravity for ground detection
@@ -109,7 +108,7 @@ func _physics_process(delta:float)->void:
 			else:
 				velocity.x -= de_acc * sign(velocity.x) * delta
 
-		var abs_spd:		= abs(velocity.x)
+		var abs_spd:float		= abs(velocity.x)
 		fastest_jump		= abs_spd > fastest_jump_treshold
 		fast_jump			= abs_spd > fast_jump_treshold
 		faster_air_limit	= abs_spd > max_walk
@@ -150,18 +149,12 @@ func _physics_process(delta:float)->void:
 			velocity.y = max_fall
 	
 	input_jump_p = input_jump												#save old jump button state
-	velocity = move_and_slide(velocity, Vector2.UP)
+	move_and_slide()
 	slide_collision_check()
 	
 
 func slide_collision_check()->void:
 	is_grounded = is_on_floor()
-	for i in get_slide_count():
-		var collision: = get_slide_collision(i)
-#		if collision.normal.y < -0.5:        	#hit up
-#			print(collision.collider)
-#		if abs(collision.normal.x) > 0.5:   	#hit sides
-#			print(collision.collider)
 
 func _process(_delta:float)->void:				#Drawing
 	if	!is_equal_approx(direction, 0.0):
@@ -176,11 +169,11 @@ func _process(_delta:float)->void:				#Drawing
 			else:
 				anim.play("Walk")
 				if abs(velocity.x) >= max_walk:
-					anim.playback_speed = 1.96
+					anim.speed_scale = 1.96
 				elif abs(velocity.x) >= min_walk:
-					anim.playback_speed = 1.62
+					anim.speed_scale = 1.62
 				else:
-					anim.playback_speed = 1
+					anim.speed_scale = 1
 	else:
 		anim.play("Jump")
 
