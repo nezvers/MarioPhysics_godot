@@ -23,7 +23,7 @@ func _ready()->void:
 	smooth_pos = target.global_position
 
 func _process(delta:float)->void:
-	target_pos = target.body.global_position
+	target_pos = target.global_position
 	projected_pos = target_pos + offset_position + (target.velocity * velocity_mult)
 	smooth_pos.x = lerp(smooth_pos.x, projected_pos.x, delta * smooth_speed.x)
 	smooth_pos.y = lerp(smooth_pos.y, projected_pos.y, delta * smooth_speed.y)

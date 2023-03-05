@@ -70,7 +70,11 @@ func _unhandled_input(event:InputEvent)->void:
 	elif event.is_action_released("ui_accept"):
 		Engine.time_scale = 1.0
 
-func _physics_process(delta:float)->void:
+func _process(delta:float)->void:				#Drawing
+	update(delta)
+	animation_states()
+
+func update(delta:float)->void:
 	direction = input_right - input_left
 	var dir:float = sign(direction)
 	
@@ -150,13 +154,10 @@ func _physics_process(delta:float)->void:
 	
 	input_jump_p = input_jump												#save old jump button state
 	move_and_slide()
-	slide_collision_check()
-
-
-func slide_collision_check()->void:
 	is_grounded = is_on_floor()
 
-func _process(_delta:float)->void:				#Drawing
+
+func animation_states()->void:
 	if	!is_equal_approx(direction, 0.0):
 		body.scale.x = sign(direction)			#flip sprite
 	body.global_position = global_position.round()
